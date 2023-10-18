@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Stop Watch</title>
+</head>
+<body>
+        
+            <div>
+                <h1 class="heading">Stop <br> Watch</h1>
+            </div>
+    
+            <div class="headDiv">
+                    <div class="numHeadDiv">
+                        <p class="numHead" style="margin-left: 10px;">Hours</p>
+                        <p class="numHead" style="margin-left: 18px;   margin-right: 10px;" >Minutes</p>
+                        <p class="numHead">Seconds</p>
+                        <p class="numHead">MilliSeconds</p>        
+                   </div>
+    
+               <div class="numDiv">
+                    <p class="num" id="hour1">0</p>
+                    <p class="num1" id="hour2">0:</p>
+                    <p class="num" id="minute1">0</p>
+                    <p class="num1" id="minute2">0:</p>
+                    <p class="num" id="second1">0</p>
+                    <p class="num1" id="second2">0:</p>
+                    <p class="num" id="miliSec1">0</p>
+                    <p class="num" id="miliSec2">0</p>
+                </div>
+            </div>
+        
+            <div>
+                <button onclick="start()" id="startBtn">Start</button>
+                <button onclick="pause()">Pause</button>
+                <button onclick="reset()">Reset</button>
+        </div>
+    
+<script src="app.js"></script>
+</body>
+</html>
