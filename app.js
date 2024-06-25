@@ -7,8 +7,7 @@ let headMin2 = document.getElementById("minute2");
 let headSec1 = document.getElementById("second1");
 let headSec2 = document.getElementById("second2");
 
-let headMilSec1 = document.getElementById("miliSec1");
-let headMilSec2 = document.getElementById("miliSec2");
+let headMilSec = document.getElementById("miliSec");
 
 let hour1 = 0;
 let hour2 = 0;
@@ -19,69 +18,63 @@ let min2 = 0;
 let sec1 = 0;
 let sec2 = 0;
 
-let milSec1 = 0;
-let milSec2 = 0;
+let milSec = 0;
 
+let startTime;
+let elapsedTime = 0;
 let interval;
 
+function updateDisplay() {
+  headHour1.innerHTML = hour1;
+  headHour2.innerHTML = hour2 + ":";
+
+  headMin1.innerHTML = min1;
+  headMin2.innerHTML = min2 + ":";
+
+  headSec1.innerHTML = sec1;
+  headSec2.innerHTML = sec2 + ":";
+
+  headMilSec.innerHTML = milSec;
+}
+
 function time() {
-  milSec2++;
-  headMilSec2.innerHTML = milSec2;
+  const now = Date.now();
+  const diff = now - startTime + elapsedTime;
 
-  if (milSec2 > 9) {
-    milSec2 = 0;
-    headMilSec2.innerHTML = milSec2;
-
-    milSec1++;
-    headMilSec1.innerHTML = milSec1;
-  } else if (milSec1 > 9) {
-    milSec1 = 0;
-    headMilSec1.innerHTML = milSec1;
-
+  milSec = Math.floor((diff % 1000) / 10);
+  if (milSec === 99) {
+    milSec = 0;
     sec2++;
-    headSec2.innerHTML = sec2 + ":";
-  } else if (sec2 > 9) {
+  } else if (sec2 === 10) {
     sec2 = 0;
-    headSec2.innerHTML = sec2 + ":";
-
     sec1++;
-    headSec1.innerHTML = sec1;
-  } else if (sec1 > 5) {
+  } else if (sec1 === 6) {
     sec1 = 0;
-    headSec1.innerHTML = sec1;
-
     min2++;
-    headMin2.innerHTML = min2 + ":";
-  } else if (min2 > 9) {
+  } else if (min2 === 10) {
     min2 = 0;
-    headMin2.innerHTML = min2 + ";";
-
     min1++;
-    headMin1.innerHTML = min1;
-  } else if (min1 > 5) {
+  } else if (min1 === 6) {
     min1 = 0;
-    headMin1.innerHTML = min1;
-
     hour2++;
-    headHour2.innerHTML = hour2 + ":";
-  } else if (hour2 > 9) {
+  } else if (hour2 === 10) {
     hour2 = 0;
-    headHour2.innerHTML = hour2 + ":";
-
     hour1++;
-    headHour1.innerHTML = hour1;
   }
+
+  updateDisplay();
 }
 
 function start() {
   let start = document.getElementById("startBtn");
   start.disabled = true;
-  clearInterval(interval);
+  startTime = Date.now();
   interval = setInterval(time, 10);
 }
 
 function pause() {
   clearInterval(interval);
+  elapsedTime += Date.now() - startTime;
   let start = document.getElementById("startBtn");
   start.disabled = false;
 }
@@ -98,18 +91,9 @@ function reset() {
   sec1 = 0;
   sec2 = 0;
 
-  milSec1 = 0;
-  milSec2 = 0;
+  milSec = 0 + "0";
 
-  headHour1.innerHTML = hour1;
-  headHour2.innerHTML = hour2 + ":";
+  elapsedTime = 0;
 
-  headMin1.innerHTML = min1;
-  headMin2.innerHTML = min2 + ":";
-
-  headSec1.innerHTML = sec1;
-  headSec2.innerHTML = sec2 + ":";
-
-  headMilSec1.innerHTML = milSec1;
-  headMilSec2.innerHTML = milSec2;
+  updateDisplay();
 }
